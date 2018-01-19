@@ -43,7 +43,7 @@
 # Copyright 2018 Your name here, unless otherwise noted.
 #
 class base {
-  $content = @(MOTD)
+  $content = @("MOTD")
     ${::fqdn}
     Managed by puppet ${::puppetversion}
     | MOTD
