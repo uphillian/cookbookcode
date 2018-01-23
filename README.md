@@ -1,3 +1,1 @@
-HELLO
-foo
-foo
+# Puppet Cookbook Module
