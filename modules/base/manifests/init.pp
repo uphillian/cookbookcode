@@ -50,4 +50,27 @@ class base {
   file {'/etc/motd':
     content => $content
   }
+
+  # concat example
+  concat {'hosts.allow':
+    path => '/etc/hosts.allow',
+    mode => 0644
+  }
+
+  concat::fragment {'hosts.allow header':
+    target  => 'hosts.allow',
+    content => "# File managed by puppet\n",
+    order   => '01'
+  }
+
+  concat::fragment {'hosts.allow local':
+    target => 'hosts.allow',
+    source => '/etc/hosts.allow.local',
+    order  => '10',
+  }
+  concat::fragment {'hosts.allow tftp':
+    target  => 'hosts.allow',
+    content => "in.ftpd: .example.com\n",
+    order   => '50',
+  }
 }
