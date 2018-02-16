@@ -1,3 +1,1 @@
 # Puppet Cookbook Module
-
-
