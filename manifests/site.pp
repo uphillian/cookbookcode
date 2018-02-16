@@ -8,6 +8,7 @@ node cookbook {
   file { '/tmp/addresslist.txt':
     content => template('base/addresslist.erb')
   }
+  include admin::percona_repo
 }
 
 node default {
