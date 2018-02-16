@@ -2,7 +2,8 @@
 class admin::percona_repo {
   exec { 'add-percona-apt-key':
     unless => '/usr/bin/apt-key list |grep percona',
-    command => '/usr/bin/gpg --keyserver hkp://keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A && /usr/bin/gpg -a --export CD2EFD2A | apt-key add -',
+    command => '/usr/bin/gpg --keyserver hkp://keys.gnupg.net --recv-keys 8507EFA5 && /usr/bin/gpg -a --export CD2EFD2A | apt-key add -',
+    #command => '/usr/bin/gpg --keyserver hkp://keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A && /usr/bin/gpg -a --export CD2EFD2A | apt-key add -',
     notify => Exec['percona-apt-update'],
   }
   exec { 'percona-apt-update':
