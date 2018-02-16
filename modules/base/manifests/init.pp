@@ -54,7 +54,7 @@ class base {
   # concat example
   concat {'hosts.allow':
     path => '/etc/hosts.allow',
-    mode => 0644
+    mode => '0644',
   }
 
   concat::fragment {'hosts.allow header':
