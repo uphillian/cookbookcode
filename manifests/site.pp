@@ -8,7 +8,7 @@ node cookbook {
   file { '/tmp/addresslist.txt':
     content => template('base/addresslist.erb')
   }
-  $message = secret('/etc/puppet/environments/production/modules/admin/files/secret_message.gpg')
+  $message = secret('/etc/puppetlabs/code/environments/production/modules/admin/files/secret_message.gpg')
   notify { "The secret message is: ${message}": }
 }
 
