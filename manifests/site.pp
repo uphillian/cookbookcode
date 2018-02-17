@@ -8,7 +8,8 @@ node cookbook {
   file { '/tmp/addresslist.txt':
     content => template('base/addresslist.erb')
   }
-  include admin::percona_repo
+  $message = secret('/etc/puppet/environments/production/modules/admin/files/secret_message.gpg')
+  notify { "The secret message is: ${message}": }
 }
 
 node default {
