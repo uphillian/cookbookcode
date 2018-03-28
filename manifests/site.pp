@@ -12,6 +12,10 @@ node cookbook {
   notify { "The secret message is: ${message}": }
 }
 
+node webserver {
+  class {'apache': }
+}
+
 node default {
   include base
   include puppet
