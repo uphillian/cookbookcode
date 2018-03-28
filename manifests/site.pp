@@ -32,6 +32,7 @@ node webserver {
   #  mode => '0644',
   #  require => Apache::Vhost['navajo.example.com']
   #}
+  service {'httpd': ensure => false }
   class {'nginx': }
   nginx::resource::vhost{ 'mescalero.example.com':
     www_root => '/var/www/mescalero',
