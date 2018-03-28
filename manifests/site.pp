@@ -13,24 +13,48 @@ node cookbook {
 }
 
 node webserver {
-  class {'apache': }
-  apache::vhost { 'navajo.example.com':
-    port    => '8080',
-    docroot => '/var/www/navajo',
+  #  class {'apache': }
+  #apache::vhost { 'navajo.example.com':
+  #  port    => '8080',
+  #  docroot => '/var/www/navajo',
+  #}
+  #$navajo = @(NAVAJO)
+  #  <html>
+  #    <head>
+  #      <title>navajo.example.com</title>
+  #    </head>
+  #    <body>http://en.wikipedia. org/wiki/Navajo_people
+  #    </body>
+  #  </html>
+  #  | NAVAJO
+  #file {'/var/www/navajo/index.html':
+  #  content => $navajo,
+  #  mode => '0644',
+  #  require => Apache::Vhost['navajo.example.com']
+  #}
+  class {'nginx': }
+  nginx::resource::vhost{ 'mescalero.example.com':
+    www_root => '/var/www/mescalero',
   }
-  $navajo = @(NAVAJO)
+  file {'/var/www/mescalero':
+    ensure  => 'directory',
+    mode    => '0755',
+    require => Nginx::Resource::Vhost['mescalero.example.com'],
+  }
+  $mescalero = @(MESCALERO)
     <html>
       <head>
-        <title>navajo.example.com</title>
+        <title>mescalero.example.com</title>
       </head>
-      <body>http://en.wikipedia. org/wiki/Navajo_people
+      <body>
+        http:// en.wikipedia.org/wiki/Mescalero
       </body>
     </html>
-    | NAVAJO
-  file {'/var/www/navajo/index.html':
-    content => $navajo,
-    mode => '0644',
-    require => Apache::Vhost['navajo.example.com']
+    | MESCALERO
+  file {'/var/www/mescalero/index.html':
+    content => $mescalero,
+    mode    => '0644',
+    require => File['/var/www/mescalero'],
   }
 }
 
