@@ -15,7 +15,7 @@ node cookbook {
 node webserver {
   class {'apache': }
   apache::vhost { 'navajo.example.com':
-    port    => '80',
+    port    => '8080',
     docroot => '/var/www/navajo',
   }
   $navajo = @(NAVAJO)
