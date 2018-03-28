@@ -14,6 +14,24 @@ node cookbook {
 
 node webserver {
   class {'apache': }
+  apache::vhost { 'navajo.example.com':
+    port    => '80',
+    docroot => '/var/www/navajo',
+  }
+  $navajo = @(NAVAJO)
+    <html>
+      <head>
+        <title>navajo.example.com</title>
+      </head>
+      <body>http://en.wikipedia. org/wiki/Navajo_people
+      </body>
+    </html>
+    | NAVAJO
+  file {'/var/www/navajo/index.html':
+    content => $navajo,
+    mode => '0644',
+    require => Apache::Vhost['navajo.example.com']
+  }
 }
 
 node default {
