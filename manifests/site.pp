@@ -68,6 +68,32 @@ node dbserver {
       }
     }
   }
+  mysql::db { 'drupal':
+    host     => 'localhost',
+    user     => 'drupal',
+    password => 'Cookbook',
+    sql      => '/root/drupal.sql',
+    require  => File['/root/drupal.sql']
+  }
+  $drupal = @(DRUPAL)
+    CREATE TABLE users (
+      id INT PRIMARY KEY AUTO_INCREMENT,
+      title VARCHAR(255),
+      body TEXT);
+    INSERT INTO users (id, title, body) VALUES (1,'First Node','Contents of first Node');
+    INSERT INTO users (id, title, body) VALUES (2,'Second Node','Contents of second Node');
+    | DRUPAL
+  file { '/root/drupal.sql':
+    ensure => present,
+    content => $drupal,
+  }
+  mysql_grant { 'drupal@localhost/drupal.nodes':
+    ensure     => 'present',
+    options    => ['GRANT'],
+    privileges => ['ALL'],
+    table      => 'drupal.nodes',
+    user       => 'drupal@localhost',
+  }
 }
 
 node default {
