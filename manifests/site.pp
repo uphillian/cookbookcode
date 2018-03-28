@@ -59,6 +59,17 @@ node webserver {
   }
 }
 
+node dbserver {
+  class { 'mysql::server':
+    root_password    => 'PacktPub',
+    override_options => {
+      'mysqld' => {
+        'max_connections' => '1024'
+      }
+    }
+  }
+}
+
 node default {
   include base
   include puppet
