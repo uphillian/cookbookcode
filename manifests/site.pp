@@ -34,13 +34,13 @@ node webserver {
   #}
   service {'httpd': ensure => false }
   class {'nginx': }
-  nginx::resource::vhost{ 'mescalero.example.com':
+  nginx::resource::server{ 'mescalero.example.com':
     www_root => '/var/www/mescalero',
   }
   file {'/var/www/mescalero':
     ensure  => 'directory',
     mode    => '0755',
-    require => Nginx::Resource::Vhost['mescalero.example.com'],
+    require => Nginx::Resource::Server['mescalero.example.com'],
   }
   $mescalero = @(MESCALERO)
     <html>
