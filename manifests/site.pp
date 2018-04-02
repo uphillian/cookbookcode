@@ -11,6 +11,11 @@ node cookbook {
   #$message = secret('/etc/puppetlabs/code/environments/production/modules/admin/files/secret_message.gpg')
   #notify { "The secret message is: ${message}": }
   include myfw
+  firewall {'0080 Allow HTTP':
+    proto  => 'tcp',
+    action => 'accept',
+    dport  => 80,
+  }
 }
 
 node webserver {
