@@ -19,7 +19,7 @@ class myfw::pre {
   }
   firewall { '0022 Allow all TCP on port 22 (ssh)':
     proto => 'tcp',
-    port => '22',
+    dport => '22',
     action => 'accept',
   }
 }
