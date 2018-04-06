@@ -20,7 +20,7 @@
 node cookbook,cookbook2 {
   class { 'keepalived':
     real_servers => ['192.168.50.10', '192.168.50.8'],
-    vip          => '192.168.50.100',
+    vip          => '192.168.50.200',
   }
 }
 
