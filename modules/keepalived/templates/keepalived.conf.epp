@@ -27,7 +27,7 @@ vrrp_instance VIP_KEEPALIVED {
 #  unicast_src_ip <%= $facts['ipaddress'] -%>
 #  unicast_peer {
 #    <% $keepalived::real_servers.each |$server| { -%>
-#    <%= $server['ip'] %>
+#    <%= $server %>
 #    <% } -%>
   }
 }
