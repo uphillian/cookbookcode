@@ -2,7 +2,8 @@ global_defs {
 }
 
 vrrp_script check_haproxy {
-  script "/sbin/pidof haproxy"
+  #script "/sbin/pidof haproxy"
+  script "/sbin/true"
   interval 2
   weight 2
 }
