@@ -1,4 +1,4 @@
-node cookbook {
+#node cookbook {
   #$mysql_password='TopSecret'
   #file { '/usr/local/bin/backup-mysql':
   #  content => template('admin/backup-mysql.sh.erb'),
@@ -10,11 +10,20 @@ node cookbook {
   #}
   #$message = secret('/etc/puppetlabs/code/environments/production/modules/admin/files/secret_message.gpg')
   #notify { "The secret message is: ${message}": }
-  include myfw
-  firewall {'0080 Allow HTTP':
-    proto  => 'tcp',
-    action => 'accept',
-    dport  => 80,
+  #include myfw
+  #firewall {'0080 Allow HTTP':
+  #  proto  => 'tcp',
+  #  action => 'accept',
+  #  dport  => 80,
+  #}
+  #}
+node cookbook,cookbook2 {
+  class { 'heartbeat::vip':
+    ip1   => '192.168.50.10',
+    ip2   => '192.168.50.8',
+    node1 => 'cookbook.example.com',
+    node2 => 'cookbook2.example.com',
+    vip   => '192.168.50.100/24',
   }
 }
 
