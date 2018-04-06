@@ -18,12 +18,9 @@
   #}
   #}
 node cookbook,cookbook2 {
-  class { 'heartbeat::vip':
-    ip1   => '192.168.50.10',
-    ip2   => '192.168.50.8',
-    node1 => 'cookbook.example.com',
-    node2 => 'cookbook2.example.com',
-    vip   => '192.168.50.100/24',
+  class { 'keepalived':
+    real_servers => ['192.168.50.10', '192.168.50.8'],
+    vip          => '192.168.50.100',
   }
 }
 
